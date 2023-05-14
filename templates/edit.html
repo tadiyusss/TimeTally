@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>Bootstrap demo</title>
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD' crossorigin='anonymous'>
+        <style>
+            .shake {
+                animation: shake 0.5s;
+            }
+        
+            @keyframes shake {
+                0% { transform: translate(0, 0); }
+                25% { transform: translate(-10px, 0); }
+                50% { transform: translate(10px, 0); }
+                75% { transform: translate(-10px, 0); }
+                100% { transform: translate(0, 0); }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard/scanner">Scanner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard/search">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container p-4">
+            <h2>Edit</h2>
+            {% if data %}
+            <form method="post" style="width: 350px;" class="d-block mx-auto">
+                <input type="hidden" name="identifier" value="{{data['attendance_data']['identifier']}}">
+                <div class="input-group my-3">
+                    <span class="input-group-text">Student Number</span>
+                    <input type="text" class="form-control" name="student_number" value="{{data['attendance_data']['student_number']}}">
+                </div>
+                <div class="input-group my-3">
+                    <span class="input-group-text">Date</span>
+                    <input type="text" class="form-control" name="date" value="{{data['attendance_data']['date']}}">
+                </div>
+                <div class="input-group my-3">
+                    <span class="input-group-text">Time</span>
+                    <input type="text" class="form-control" name="time" value="{{data['attendance_data']['time']}}">
+                </div>
+                <div class="input-group my-3">
+                    <span class="input-group-text">
+                        Status
+                    </span>
+                    <select name="status" id="status" class="form-select" >
+                        <option value="Success">Success</option>
+                        <option value="Late">Late</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Save" class="btn btn-success">
+                    <a href="/admin/dashboard" class="btn btn-danger">
+                        Discard
+                    </a>
+                </div>
+                
+            </form>
+            {% endif %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
+    </body>
+</html>
