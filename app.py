@@ -295,5 +295,10 @@ def view_qr(student_id):
 if __name__ == '__main__':
     if '--ssl' in sys.argv:
         app.run(host='0.0.0.0', ssl_context='adhoc')
+    elif '--desktop' in sys.argv:
+        from pyfladesk import init_gui
+        init_gui(app, window_title = "TimeTally")
+    elif '--debug' in sys.argv:
+        app.run(host='0.0.0.0', debug=True)
     else:
         app.run(host='0.0.0.0')
