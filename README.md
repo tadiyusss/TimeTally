@@ -1,5 +1,5 @@
 
-# QR Attendance
+# TimeTally
 
 This application is built using Python Flask and Bootstrap. The application is designed to scan QR codes and save the scanned data as attendance. With this app, you can easily manage attendance tracking, making it faster and more efficient.
 
