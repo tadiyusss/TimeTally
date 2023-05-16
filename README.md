@@ -30,3 +30,9 @@ Run application in ssl (Required to run qr scanner outside localhost)
 ```
 python3 app.py --ssl
 ```
+
+Run application in desktop
+
+```
+python3 app.py --desktop
+```
