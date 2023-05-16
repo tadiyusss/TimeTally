@@ -1,4 +1,4 @@
-Flask==2.2.2
+Flask==2.2.5
 pysondb==1.6.7
 qrcode==7.4.2
 Werkzeug==2.2.3
