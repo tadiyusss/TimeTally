@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>TimeTally - Dashboard</title>
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD' crossorigin='anonymous'>
+        <style>
+            body{
+                background: url('/static/background.svg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            video{
+                border-radius: 10px;
+            }
+            #qr-shaded-region{
+                border-radius: 10px;
+            }
+            img{
+                display: none;
+            }
+            button{
+                border: var(--bs-light);
+                background-color: var(--bs-light);
+                border-radius: 5px;
+                padding: 10px;
+            }
+            span{
+                color: var(--bs-light);
+            }
+            #reader{
+                width: 50%;
+                margin-top: 5%;
+            }
+            @media only screen and (max-width: 600px) {
+                #reader{
+                    width: 90%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="d-block mx-auto border-0" id="reader"></div>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
+        <script>
+            function onScanSuccess(decodedText, decodedResult) {
+                
+                console.log(`Code scanned = ${decodedText}`, decodedResult);
+                $.ajax({
+                    url: "/api/scan/qr",
+                    type: "POST",
+                    data: {
+                        "identifier": decodedText
+                    },
+                    success: function(data){
+                        if(data['status'] == 'success'){
+                            var success = new Audio('/static/success.mp3');
+                            success.play();
+                            console.log(data)
+                        } else {
+                            var fail = new Audio('/static/failed.mp3');
+                            fail.play();
+                            console.log(data)
+                        }
+                        
+                    },
+                    fail: function(data){
+                        var fail = new Audio('/static/failed.mp3');
+                        fail.play();
+                        console.log('Failed');
+                    }
+                })
+                html5QrcodeScanner.pause();
+                setTimeout(function(){
+                    html5QrcodeScanner.resume()
+                }, 2000);
+            }
+            
+            var html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", 
+                { fps: 10, qrbox: 275 }
+            );
+            html5QrcodeScanner.render(onScanSuccess);
+        </script>
+    </body>
+</html>

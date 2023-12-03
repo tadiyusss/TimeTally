@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>TimeTally - Register</title>
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD' crossorigin='anonymous'>
+        <style>
+            body{
+                background: url('/static/background.svg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            form{
+                width: 450px;
+                margin: auto;
+                margin-top: 8%;
+            }
+            @media screen and (max-width: 500px) {
+                form{
+                    margin: auto;
+                    margin-top: 5vh;
+                    width: 90vw;
+                    height: 90vh;
+                }
+            }
+        </style>
+    </head>
+    <body class="bg-primary border border-primary" style="min-height: 100vh;">
+        <form method="POST" class="p-5 bg-light rounded">
+            <h2>Register</h2>
+            <label for="name" class="my-2">Name</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+            <label for="username" class="my-2">Username</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+            <label for="password" class="my-2">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required>
+            <div class="my-2">
+                <input type="radio" id="type_student" name="account_type" value="Student">
+                <label for="type_student">Student</label><br>
+                <input type="radio" id="type_teacher" name="account_type" value="Teacher">
+                <label for="type_student">Teacher</label><br> 
+            </div>
+             
+            <p class="m-0 my-2" >{{message}}</p>
+            <input type="submit" value="Register" class="btn btn-primary my-2">
+            <p class="mt-2">Already have an account? <a href="/">Login</a>.</p>
+            
+        </form>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js' integrity='sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN' crossorigin='anonymous'></script>
+    </body>
+</html>
